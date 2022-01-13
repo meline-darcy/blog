@@ -1,0 +1,14 @@
+body{
+    background: url('../img/hey.png') center;
+    background-size: cover;
+    min-height: 800px;
+    font-family: 'Helvetica Neue', sans-serif;
+    
+    }
+
+.formulaire{
+    background-color: white;
+    height: 500px;
+    width: 300px;
+    margin-left: 35%;
+}
