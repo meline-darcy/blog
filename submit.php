@@ -35,7 +35,7 @@ if (isset($res)) {
          <h3>Vous avez envoyé le commentaire avec succès.</h3>
          <p>Vous allez être redirigés vers l'article.</p>
          </div>";
-     header("refresh:2; url=articles.php?idarticle=$idarticle");
+     header("refresh:0; url=articles.php?idarticle=$idarticle");
 } else {
     echo "L'envoi du commentaire a échoué";
 }
