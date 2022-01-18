@@ -1,13 +1,16 @@
  <?php
 
+session_start();
+
 
     $bdd = mysqli_connect("localhost", "root", "", "blog");
 
 
-    $req = mysqli_query($bdd, " SELECT utilisateurs.id, utilisateurs.login, utilisateurs.prenom, utilisateurs.password, utilisateurs.email, droits.nom FROM utilisateurs INNER JOIN droits ON utilisateurs.id_droits = droits.id");
+    $req = mysqli_query($bdd, "SELECT * FROM utilisateurs INNER JOIN droits ON utilisateurs.id_droits = droits.id");
 
 
     $res = mysqli_fetch_all($req);
+    var_dump($res);
 
 
     if (isset($_POST['env'])) {
@@ -22,9 +25,6 @@
         } elseif ($_POST['statut'] == "moderateur") {
             $id_droit = 42;
         }
-        var_dump($requser);
-        var_dump($req);
-        var_dump($_POST);
         $requser = mysqli_query($bdd, "UPDATE utilisateurs SET login='$login1', prenom='$prenom1', email='$email1', id_droits='$id_droit' WHERE  id = $id1 ");
         header("Location: admin.php");
         
@@ -99,11 +99,12 @@
 
             $reqarticle = mysqli_query($bdd, "UPDATE articles SET login='', article='$idarticle', titre='$titre',  WHERE  id = $idarticle ");
             header("Location: admin.php");
+            var_dump($reqarticle);
 
-           if (isset($_POST['delete'])) {
-            $reqdelete = mysqli_query($bdd, "DELETE FROM articles WHERE id = $idarticle");
+        //    if (isset($_POST['delete'])) {
+            // $reqdelete = mysqli_query($bdd, "DELETE FROM articles WHERE id = $idarticle");
         }    
-        }
+        // }
         ?>
      <h1>Info article</h1>
      <table>
@@ -121,9 +122,6 @@
                <td> <input type="article"  value="' . $articles['article'] . '" name="id"></td>
                <td> <input type="text" value="' . $articles['login'] . '" name="login"> </td>
                <td>   <input type="submit" name="envarticle"  Envoyer /> </td>
-               <td>   <input type="submit" name="delete"  Supprimer /> </td>
-
-          
                </form> </tr>';
                 }
 
