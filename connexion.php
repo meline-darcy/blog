@@ -49,17 +49,17 @@ $connect= mysqli_connect("localhost","root","","blog");
     $res= mysqli_fetch_all($sql); 
     
     if (empty($res)) {
-        echo 'Mec... c est pas bon... Ton mdp ou login est mauvais';
+        echo 'Ton mot de passe ou login est faux  ';
     }
      else {
          if($res[0][4] == $password){
             
             if ( $password == 'Admin'){
                 
-                header ("refresh:4;url=admin.php");
+                header ("refresh:2;url=admin.php");
     
             }else {
-                echo $res[0][2] .'Bonjour Maitre 🦮! Je vous guide vers le site :o';
+                echo $res[0][2] .'Bonjour, tu va être rediriger vers ton profil';
                 $_SESSION["id"] = $res[0][0];
                 header ("refresh:4;url=profil.php");
 

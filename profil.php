@@ -44,7 +44,9 @@ if (isset($_POST['env']))
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/profil.css">
 </head>
+<body>
 <header>
+<main>
 <?php include("include/header.php") ?></header>
 
         <section class="home">
@@ -69,12 +71,9 @@ if (isset($_POST['env']))
                 </div>
         </section>
 </header>
-
+</main>
 <body>
-    <main>
+    
 
-    </main>
- 
-</body>
 
 </html>

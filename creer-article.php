@@ -10,11 +10,7 @@ $req= mysqli_query($bdd," SELECT utilisateurs.id, utilisateurs.login, utilisateu
 $res= mysqli_fetch_all($req);
 
 
-if ($_SESSION['id'] == 1){
-  
-   header("location: index.php");
-   
-}
+
 ?>
 <html>
 <head>
@@ -37,8 +33,8 @@ if ($_SESSION['id'] == 1){
          
             </select>
             <br><br><br>
-      <input name="Titre" placeholder="Titre l'article"></inpute><br />
-      <textarea name="id_text" placeholder="Texte  de l'article"></textarea><br />
+      <input name="Titre" placeholder="Titre l'article"></inpute><br /><br /><br />
+      <textarea name="id_text" placeholder="Texte  de l'article"></textarea><br /><br /><br />
      
       <input type="submit" name="hero" value="Envoyer l'article"/>
      

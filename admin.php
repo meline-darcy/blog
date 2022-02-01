@@ -2,11 +2,13 @@
 <html>
     <head>
         <title>Cours PHP / MySQL</title>
+        <link rel="stylesheet" href="css/header.css">
         <meta charset="utf-8">
 
     </head>
     <body>
-        <h1>Bases de données MySQL</h1>
+    <header>
+<?php include("include/header.php") ?></header>
         <?php
           
             
@@ -19,7 +21,7 @@
                 $id1 = $_POST['id'];
         
                 $reqban = mysqli_query($bdd,"DELETE FROM utilisateurs WHERE id = $id1");
-                var_dump($reqban);
+               
             }
         
         
@@ -73,9 +75,9 @@
                foreach ($res as $utilisateur) {
                    echo '<tr><form method="post" action="">
                     <td> <input type="text"  value="'.$utilisateur[0].'" name="id"></td>
-                    <td> <input type="text" value="'.$utilisateur[1].'" name="login"> </td>
-                    <td> <input type="text" value="'.$utilisateur[2].'" name="prenom"> </td>
-                    <td> <input type="text" value="'.$utilisateur[3].'" name="email"> </td>
+                    <td> <input type="text" value="'.$utilisateur[1].'" name="login"></td>
+                    <td> <input type="text" value="'.$utilisateur[2].'" name="prenom"></td>
+                    <td> <input type="text" value="'.$utilisateur[3].'" name="email"></td>
                     <td> <select name="statut" >
                     <option name="uti" value="utilisateur">utilisateur</option>
                     <option name="modo" value="moderateur">moderateur</option>
@@ -91,17 +93,8 @@
                ?>
             </tbody>
         </table>
-    </body>
-</html>
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Cours PHP / MySQL</title>
-        <meta charset="utf-8">
 
-    </head>
-    <body>
-        <h1>Articles</h1>
+        
         <?php
           
             
@@ -172,15 +165,15 @@
 $req3 = mysqli_query($bdd, "SELECT * FROM categories");
 $res3 = mysqli_fetch_all($req3, MYSQLI_ASSOC);
 
-if (isset($_POST['envoi'])) {
+if (isset($_POST['envcategorie'])) {
     $idcategorie = $res3[0]['id'];
     $nomcategorie = $_POST['nomcategorie'];
-    $reqcategorie = mysqli_query($bdd,"UPDATE categories SET nom='$nomcategorie', WHERE  id = $idcategorie ");
-    
+    $ins = mysqli_query ($bdd,"INSERT INTO categories (id_categorie, nom_categorie) VALUES ('$idcategorie','$nomcategorie',");
+    header("Location: admin.php");
 }
 ?>
 
-<h1>categorie</h1>
+<h1>Categorie</h1>
 <table>
  <thead>
      <th>nom</th>
@@ -190,8 +183,8 @@ if (isset($_POST['envoi'])) {
 
         foreach ($res3 as $categorie) {
             echo '<tr><form method="post" action="">
-       <td> <input type="titre"  value="' . $categorie['nom'] . '" name="nomcategorie"></td>
-       <td>   <input type="submit" name="envoi" value=Modifier> </td>
+       <td> <input type="titre"  value="' . $categorie['nom'] . '" name="id"></td>
+       <td>   <input type="submit" name="envcategorie"  Envoyer /> </td>
        </form> </tr>';
         }
 

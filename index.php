@@ -1,3 +1,19 @@
+<?php
+session_start();
+$bdd = new PDO("mysql:host=localhost;dbname=blog;charset=utf8", "root", "");
+$articlesParPage = 5;
+$articlesTotalesReq = $bdd->query('SELECT id FROM articles');
+$articlesTotales = $articlesTotalesReq->rowCount();
+$pagesTotales = ceil($articlesTotales/$articlesParPage);
+if(isset($_GET['start']) AND !empty($_GET['start']) AND $_GET['start'] > 0 AND $_GET['start'] <= $pagesTotales) {
+   $_GET['start'] = intval($_GET['start']);
+   $pageCourante = $_GET['start'];
+} else {
+   $pageCourante = 1;
+}
+$depart = ($pageCourante-1)*$articlesParPage;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,6 +39,9 @@
 </main>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br>
+
+  
+   </body>
 <footer>
 <?php include("include/footer.php") ?>
 </footer>

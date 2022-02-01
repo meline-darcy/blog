@@ -1,5 +1,6 @@
 <?php
 session_start();
+ini_set('display_errors','off');
 $bdd = new PDO("mysql:host=localhost;dbname=blog;charset=utf8", "root", "");
 $req=  $bdd->query('SELECT login,articles.article, articles.id_utilisateur FROM utilisateurs, articles');  
 
@@ -31,13 +32,17 @@ $depart = ($pageCourante-1)*$articlesParPage;
 <header>
 <?php include("include/header.php") ?></header>
 <div class="formulaire">
+<p>Choisis une categorie :</p>
             <form method="GET" action="">
             <select name="categorie" >
+         
+</br>
 
                     <option  value="1">Champions</option>
                     <option value="2">Mises à jour</option>
                     <option value="3">Communauté</option>
                </select>
+</br></br>
                <input type="submit"   value="Entrer"/>
                <br>
                
@@ -48,7 +53,6 @@ $depart = ($pageCourante-1)*$articlesParPage;
       $categories = $bdd->prepare('SELECT login, date, titre,article, id_categorie, articles.id AS idarticles FROM articles INNER JOIN categories ON categories.id = articles.id_categorie INNER JOIN utilisateurs ON articles.id_utilisateur = utilisateurs.id where id_categorie = ? ORDER BY articles.date DESC LIMIT '.$depart.','.$articlesParPage);
       $categories->execute(array($categorie));
       $result=$categories->fetchAll(PDO::FETCH_ASSOC); 
-      $articles = $bdd->query('SELECT articles.*, utilisateurs.login FROM articles INNER JOIN utilisateurs ON utilisateurs.id = articles.id_utilisateur ORDER BY articles.date DESC LIMIT '.$depart.','.$articlesParPage);
       //$pagetrie = $bdd->query('SELECT articles.*,categories.nom FROM articles INNER JOIN categories ON articles.id_categorie = categories.id GROUP BY articles.id'); 
       
       foreach($result AS $res) {
@@ -58,19 +62,21 @@ $depart = ($pageCourante-1)*$articlesParPage;
       
             <b>Titre:<?php echo $res['titre']; ?></b>
             </br></i> article écrit par: <?php echo $res['login']; ?> </br>
-            <a href='articles.php?idarticle=<?php echo $res['idarticles']; ?> '> voir l'article.</a>
+            <a id="afiicherarticles" href='articles.php?idarticle=<?php echo $res['idarticles']; ?> '> voir l'article.</a>
             </b> posté le : <?php echo $res['date']; ?>
             <br /><br />
             <?php
       }
 
       ?>
+
+      
             <?php
       for($i=1;$i<=$pagesTotales;$i++) {
          if($i == $pageCourante) {
             echo $i.' ';
          } else {
-            echo '<a href="afficher-articles.php?categorie='.$categorie.'&start='.$i.'">'.$i.'</a> ';
+            echo '<a id="afiicherarticles" href="afficher-articles.php?categorie='.$categorie.'&start='.$i.'">'.$i.'</a> ';
          }
       }
       ?>
