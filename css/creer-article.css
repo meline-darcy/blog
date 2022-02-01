@@ -16,7 +16,7 @@
 }
 
 form {
-    width: 450px;
+    width: 550px;
     min-height: 500px;
     height: auto;
     border-radius: 5px;
@@ -42,5 +42,8 @@ form .con {
       margin: 0 auto;
 }
 
-
+textarea{
+    height: 300px;
+    width: 450px;
+}
 
