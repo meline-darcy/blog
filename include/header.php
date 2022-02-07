@@ -19,7 +19,7 @@
         </li>
         <li><a href="#">Actualités</a></li>
         <li>
-        <a href="#">Articles ▿</a>
+        <a href="#">Articles▿</a>
           <ul class="sub-menu">
           <?php 
                             if (isset($_SESSION["id"])){
@@ -38,7 +38,7 @@
         <li><a href="#">Photos</a></li>
           
         <li>
-        <a href="#">Espaces Membres ▿</a>
+        <a href="#">Espaces Membres▿</a>
           <ul class="sub-menu">
           <?php 
                             if (isset($_SESSION["id"])){
